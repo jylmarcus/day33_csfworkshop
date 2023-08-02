@@ -1,0 +1,20 @@
+<div class="container">
+  <form [formGroup]="todoForm" (ngSubmit)="processForm()">
+      <div>
+        <label for="description" class="form-label">Description: </label>
+        <input type="text" class="form-control" name="description" formControlName = "description">
+      </div>
+        <label for="priority" class="form-label">Priority: </label>
+        <br>
+        <input type="radio" name="priority" value="low" formControlName="priority">Low
+        <input type="radio" name="priority" value="med" formControlName="priority">Med
+        <input type="radio" name="priority" value="high" formControlName="priority">High
+      <div>
+        <label for="due" class="form-label">Due: </label>
+        <br>
+        <input type="date" name="due" formControlName="due" min="{{this.minDate}}">
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
