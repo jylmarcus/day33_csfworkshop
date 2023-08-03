@@ -1,10 +1,16 @@
 {
-  "fruits" : [
+  "todo": [
     {
-      "id": 1,
-      "name": "cherry",
-      "quantity": 100,
-      "price": 25
+      "description": "walk the dog",
+      "priority": "low",
+      "due": "2023-08-03",
+      "id": 1
+    },
+    {
+      "description": "eat a fish",
+      "priority": "med",
+      "due": "2023-08-04",
+      "id": 2
     }
   ]
 }

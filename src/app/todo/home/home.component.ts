@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Todo } from '../todo';
+import { TodoService } from '../todo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,9 @@ import { Todo } from '../todo';
 export class HomeComponent implements OnInit{
   todoForm: FormGroup;
   minDate: string;
+  todoList: Todo[] = [];
 
-  constructor(private fb: FormBuilder) { };
+  constructor(private fb: FormBuilder, private toDoService: TodoService, private router: Router) { };
 
   ngOnInit(): void {
     this.minDate = new Date().toISOString().slice(0,10);
@@ -22,10 +25,23 @@ export class HomeComponent implements OnInit{
         due: this.fb.control<Date>(new Date())
       }
     )
+    this.toDoService.getAll('todo').subscribe((data => {
+      this.todoList = data;
+    }))
   }
 
   processForm() {
     const toDo = this.todoForm.value as Todo;
-    console.log(toDo);
+    this.toDoService.create('todo', toDo).subscribe({
+      next: (data) => {
+        this.router.navigate(["/todo/home"])
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+    this.toDoService.getAll('todo').subscribe((data => {
+      this.todoList = data;
+    }))
   }
 }
