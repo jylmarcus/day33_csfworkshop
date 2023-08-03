@@ -1,22 +1,26 @@
 <div class="container">
   <form [formGroup]="todoForm" (ngSubmit)="processForm()">
-      <div>
+      <mat-form-field>
         <label for="description" class="form-label">Description: </label>
-        <input type="text" class="form-control" name="description" formControlName = "description">
+        <input type="text" class="form-control" name="description" formControlName = "description" placeholder="Please enter your todo" matInput>
         <p *ngIf="todoForm.get('description')!.hasError('minlength')">Write a longer description</p>
-      </div>
-        <label for="priority" class="form-label">Priority: </label>
-        <br>
-        <input type="radio" name="priority" value="low" formControlName="priority">Low
-        <input type="radio" name="priority" value="med" formControlName="priority">Med
-        <input type="radio" name="priority" value="high" formControlName="priority">High
-      <div>
+      </mat-form-field>
+      <mat-radio-group>
+          <label for="priority" class="form-label">Priority: </label>
+          <br>
+          <mat-radio-button name="priority" value="low" formControlName="priority">Low</mat-radio-button>
+          <mat-radio-button name="priority" value="med" formControlName="priority">Med</mat-radio-button>
+          <mat-radio-button name="priority" value="high" formControlName="priority">High</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field appearance="fill">
         <label for="due" class="form-label">Due: </label>
         <br>
-        <input type="date" name="due" formControlName="due" min="{{this.minDate}}">
-      </div>
+        <input matInput [matDatepicker]="datepicker" name="due" formControlName="due" min="{{this.minDate}}">
+        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker></mat-datepicker>
+      </mat-form-field>
       <br>
-      <button type="submit" class="btn btn-primary" [disabled]="todoForm.invalid">Submit</button>
+      <button type="submit" color="primary" mat-raised-button [disabled]="todoForm.invalid">Submit</button>
   </form>
 
   <hr>
