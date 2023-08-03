@@ -3,6 +3,7 @@
       <div>
         <label for="description" class="form-label">Description: </label>
         <input type="text" class="form-control" name="description" formControlName = "description">
+        <p *ngIf="todoForm.get('description')!.hasError('minlength')">Write a longer description</p>
       </div>
         <label for="priority" class="form-label">Priority: </label>
         <br>
@@ -15,7 +16,7 @@
         <input type="date" name="due" formControlName="due" min="{{this.minDate}}">
       </div>
       <br>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" [disabled]="todoForm.invalid">Submit</button>
   </form>
 
   <hr>

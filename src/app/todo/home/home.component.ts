@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
     this.minDate = new Date().toISOString().slice(0,10);
     this.todoForm = this.fb.group(
       {
-        description: this.fb.control<string>(''),
+        description: this.fb.control<string>('', [Validators.required, Validators.minLength(5)]),
         priority: this.fb.control<string>('low'),
         due: this.fb.control<Date>(new Date())
       }
